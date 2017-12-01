@@ -17,63 +17,37 @@ namespace Day01
             else return 0;
         }
 
-        public static void partOne() {
-            sequence = File.ReadAllLines("../../input.txt")[0].Select(c => int.Parse(c.ToString())).ToList();
-            //sequence = "91212129".Select(c => int.Parse(c.ToString())).ToList();
+        public static int findCaptchaSol(List<int> input, int nextDigitLoc)
+        {
             int solution = 0;
 
-            for (int i = 0; i < sequence.Count; i++)
+            for (int i = 0; i < input.Count; i++)
             {
-                int firstDigit = sequence[i];
+                int firstDigit = input[i];
                 int secondDigit = 0;
 
-                if (i == sequence.Count - 1)
+                if (i + nextDigitLoc > input.Count() - 1)
                 {
-                    secondDigit = sequence[0];
+                    int loc = (i + nextDigitLoc) - (input.Count() - 1) - 1;
+                    secondDigit = input[loc];
                 }
                 else
                 {
-                    secondDigit = sequence[i + 1];
+                    secondDigit = input[i + nextDigitLoc];
                 }
 
                 solution += digitMatch(firstDigit, secondDigit);
             }
 
-            Console.WriteLine("The Captcha solution is: " + solution);
-        }
-
-        public static void partTwo() {
-            sequence = File.ReadAllLines("../../input.txt")[0].Select(c => int.Parse(c.ToString())).ToList();
-            //sequence = "12131415".Select(c => int.Parse(c.ToString())).ToList();
-            int solution = 0;
-
-            for (int i = 0; i < sequence.Count; i++)
-            {
-                int firstDigit = sequence[i];
-                int secondDigit = 0;
-                int half = sequence.Count() / 2;
-
-                if(i + half > sequence.Count() - 1)
-                {
-                    int loc = (i + half) - (sequence.Count() - 1) - 1;
-                    secondDigit = sequence[loc];
-                }
-                else
-                {
-                    secondDigit = sequence[i + half];
-                }
-
-                solution += digitMatch(firstDigit, secondDigit);
-            }
-
-            Console.WriteLine("The Captcha solution is: " + solution);
-            Console.Read();
+            return solution;
         }
 
         static void Main(string[] args)
         {
-            partOne();
-            partTwo();
+            List<int> sequence = File.ReadAllLines("../../input.txt")[0].Select(c => int.Parse(c.ToString())).ToList();
+            Console.WriteLine("Part 1 Solution: " + findCaptchaSol(sequence, 1));
+            Console.WriteLine("Part 2 Solution: " + findCaptchaSol(sequence, sequence.Count() / 2));
+            Console.Read();
         }
     }
 }
