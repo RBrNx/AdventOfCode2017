@@ -15,7 +15,8 @@ namespace Day03
         static int upperWidth = 0;
         static int lowerHeight = 0;
         static int lowerWidth = 0;
-        static int input = 361527;       
+        static int input = 361527;
+        static bool stressFound = false;
 
         static void createSpiralGrid(int maxNum)
         {
@@ -42,6 +43,14 @@ namespace Day03
                 if (x < lowerWidth) lowerWidth = x;
                 if (y < lowerHeight) lowerHeight = y;
 
+                int sum = sumAdjacentSquares(Tuple.Create(x, y));
+                stressValues.Add(Tuple.Create(x, y), sum);
+                if (sum > input && !stressFound)
+                {
+                    stressFound = true;
+                    Console.WriteLine(sum + " is the 1st Value written greater than " + input);
+                }
+
                 if (segment_passed == segment_length)
                 {
                     // done with current segment
@@ -67,7 +76,55 @@ namespace Day03
 
         static int sumAdjacentSquares(Tuple<int, int> pos)
         {
-            return 0;
+            int x = (int)pos.Item1;
+            int y = (int)pos.Item2;
+            int sum = 0;
+
+            var left = Tuple.Create(x - 1, y);
+            var right = Tuple.Create(x + 1, y);
+            var up = Tuple.Create(x, y - 1);
+            var down = Tuple.Create(x, y + 1);
+
+            var leftUp = Tuple.Create(x - 1, y - 1);
+            var rightUp = Tuple.Create(x + 1, y - 1);
+            var leftDown = Tuple.Create(x - 1, y + 1);
+            var rightDown = Tuple.Create(x + 1, y + 1);
+
+            if (stressValues.ContainsKey(left))
+            {
+                sum += stressValues[left];
+            }
+            if (stressValues.ContainsKey(right))
+            {
+                sum += stressValues[right];
+            }
+            if (stressValues.ContainsKey(up))
+            {
+                sum += stressValues[up];
+            }
+            if (stressValues.ContainsKey(down))
+            {
+                sum += stressValues[down];
+            }
+
+            if (stressValues.ContainsKey(leftUp))
+            {
+                sum += stressValues[leftUp];
+            }
+            if (stressValues.ContainsKey(rightUp))
+            {
+                sum += stressValues[rightUp];
+            }
+            if (stressValues.ContainsKey(leftDown))
+            {
+                sum += stressValues[leftDown];
+            }
+            if (stressValues.ContainsKey(rightDown))
+            {
+                sum += stressValues[rightDown];
+            }
+
+            return sum;
         }
 
         static void PartOne() {
