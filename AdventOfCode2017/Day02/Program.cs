@@ -8,7 +8,7 @@ namespace Day02
 {
     class Program
     {
-        static string[] lines = File.ReadAllLines("input.txt");
+        static string[] lines = File.ReadAllLines("../../input.txt");
 
         static int findDivisor(List<int> numbers)
         {
