@@ -14,16 +14,30 @@ namespace Day12
         {
             public int id;
             public List<int> directlyConnected = new List<int>();
-            public bool? connectedToZero = null;
+            public int? connectedTo = null;
         }
 
         static void checkConnected(villageProgram program)
         {
-            for(int i = 0; i < program.directlyConnected.Count; i++)
+            if (program.connectedTo == null) {
+                groups.Add(new List<villageProgram> { program });
+                program.connectedTo = groups.Count - 1;
+            }
+
+            if (!groups[(int)program.connectedTo].Contains(program))
+            {
+                groups[(int)program.connectedTo].Add(program);
+            }
+
+            for (int i = 0; i < program.directlyConnected.Count; i++)
             {
                 villageProgram dcProgram = programs.Find(p => p.id == program.directlyConnected[i]);
-                dcProgram.connectedToZero = true;
-                dcProgram.directlyConnected.Remove(program.id);
+                dcProgram.connectedTo = program.connectedTo;
+                dcProgram.directlyConnected.Remove((int)program.connectedTo);
+                for(int j = 0; j < groups[(int)program.connectedTo].Count; j++)
+                {
+                    dcProgram.directlyConnected.Remove(groups[(int)program.connectedTo][j].id);
+                }
                 checkConnected(dcProgram);
             }
         }
@@ -45,9 +59,13 @@ namespace Day12
                 programs.Add(program);
             }
 
-            programs[0].connectedToZero = true;
-            checkConnected(programs[0]);
-            Console.WriteLine("There are " + programs.Where(p => p.connectedToZero == true).Count() + " connected to Program 0");
+            while(programs.Where(p => p.connectedTo == null).Count() > 0)
+            {
+                checkConnected(programs.Where(p => p.connectedTo == null).First());
+            }
+            
+            Console.WriteLine("There are " + groups[0].Count + " connected to Program 0");
+            Console.WriteLine("There are " + groups.Count + " groups in total");
             Console.Read();
         }
     }
