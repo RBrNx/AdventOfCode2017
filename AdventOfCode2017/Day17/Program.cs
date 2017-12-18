@@ -6,49 +6,44 @@ using System.Threading.Tasks;
 
 namespace Day17
 {
-    class bufferElement
-    {
-        public int position;
-        public int value;
-
-        public bufferElement(int p, int v)
-        {
-            position = p;
-            value = v;
-        }
-    }
-
     class Program
     {
+
+        static int calcBuffer(int input, int toFind)
+        {
+            int currentPos = 0;
+            int bufferLength = 1;
+
+            for (int i = 1; i <= toFind; i++)
+            {
+                int pos = ((currentPos + input) % bufferLength) + 1;
+                currentPos = pos;
+
+                if (i == toFind) return i;
+            }
+
+            return 0;
+        }
 
         static void Main(string[] args)
         {
             int currentPos = 0;
-            int position2018 = 0;
-            int position0 = 0;
             int input = 369;
-            List<bufferElement> buffer = new List<bufferElement>() { new bufferElement(0, 0) };
+            int besideZero = 0;
+            List<int> buffer = new List<int>() { 0 };
+            int bufferSize = buffer.Count();
 
             for (int i = 1; i <= 50000000; i++)
             {
-                int pos = ((currentPos + input) % buffer.Count) + 1;
-                buffer.Where(e => e.position >= pos).ToList().ForEach(e => e.position++);
-                buffer.Add(new bufferElement(pos, i));
+                int pos = ((currentPos + input) % bufferSize) + 1;
+                if(i < 2018) buffer.Insert(pos, i);
+                bufferSize++;
+                if (pos == 1) besideZero = i;
                 currentPos = pos;
-
-                if (i == 2017)
-                {
-                    int p = buffer.Find(x => x.value == 2017).position;
-                    Console.WriteLine("The value after 2017 is: " + buffer.Find(x => x.position == p + 1).value);
-                }
-                if (i == 50000000)
-                {
-                    int p = buffer.FindIndex(x => x.value == 0);
-                    Console.WriteLine("The value after 2017 is: " + buffer.Find(x => x.position == p + 1).value);
-                }
             }
 
-
+            Console.WriteLine("The value beside 2017 is: " + buffer[buffer.IndexOf(2017) + 1]);
+            Console.WriteLine("The value beside 0 is: " + besideZero);
             Console.Read();
         }
     }
