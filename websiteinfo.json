@@ -1,6 +1,6 @@
 {
   "show": true,
-  "image": "img/aoc2017.png",
-  "title": "Advent Of Code 2017",
-  "description": "Complete answers for the Advent of Code 2017 challenge."
+  "image": "img/AdventofCode.png",
+  "title": "Advent Of Code Challenges",
+  "description": "Complete answers for all the Advent of Code challenges."
 }
