@@ -1,6 +1,7 @@
 {
   "show": true,
-  "image": "img/AdventofCode.png",
+  "imageMain": "img/AdventofCode.png",
+  "imageDrop": "img/AdventofCode_2.png",
   "title": "Advent Of Code Challenges",
   "description": "Complete answers for all the Advent of Code challenges."
 }
