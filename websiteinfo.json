@@ -4,9 +4,9 @@
   "imageDrop": "img/AdventofCode_2.png",
   "title": "Advent Of Code Challenges",
   "description": "Complete answers for all the Advent of Code challenges.",
-  "carouselImages": [ "AdventofCode.png", "AdventofCode_2.png", "aoc2017.png" ]
-  "aboutProject": "<p>Advent of Code is a series of small programming puzzles for a variety of skill levels. They are self-contained and are just as appropriate for a beginner who is just learning to code, as they are for an expert who wants to stay sharp.</p><p>Each day throughout December a new puzzle is released, each one with two parts to solve and two gold stars to collect. Every year there is a different story that explains why you need to collect these gold stars, usually it's to help Santa!</p><p>I have individual Github repositories containing my answers for each year that Advent of Code has been running.</p>
-  "techSheet": [ "C# .NET", "C++", "LINQ", "Problem Solving", "Optimizing Code", "Pathfinding Algorithms" ]
+  "carouselImages": [ "AdventofCode.png", "AdventofCode_2.png", "aoc2017.png" ],
+  "aboutProject": "<p>Advent of Code is a series of small programming puzzles for a variety of skill levels. They are self-contained and are just as appropriate for a beginner who is just learning to code, as they are for an expert who wants to stay sharp.</p><p>Each day throughout December a new puzzle is released, each one with two parts to solve and two gold stars to collect. Every year there is a different story that explains why you need to collect these gold stars, usually it's to help Santa!</p><p>I have individual Github repositories containing my answers for each year that Advent of Code has been running.</p>",
+  "techSheet": [ "C# .NET", "C++", "LINQ", "Problem Solving", "Optimizing Code", "Pathfinding Algorithms" ],
   "links": [ { "linkText": "Advent of Code", "link": "https://adventofcode.com/"
              { "linkText": "Advent of Code 2015 (Github)", "link": "https://github.com/RBrNx/AdventOfCode2015" }, 
              { "linkText": "Advent of Code 2016 (Github)", "link": "https://github.com/RBrNx/AdventOfCode2016" },
